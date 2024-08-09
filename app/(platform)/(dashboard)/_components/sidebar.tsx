@@ -12,7 +12,7 @@ import { Accordion } from "@/components/ui/accordion";
 import { NavItem, Organization } from "./nav-item";
 
 interface SidebarProps {
-  storageKey: string;
+  storageKey?: string;
 }
 
 export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
@@ -28,7 +28,7 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     },
   });
 
-  const defaultAccordionValue: string = Object.keys(expanded).reduce(
+  const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
       if (expanded[key]) {
         acc.push(key);
@@ -43,7 +43,19 @@ export const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
   };
 
   if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading)
-    return <Skeleton />;
+    return (
+      <>
+        <div className="flex items-center justify-between mb-2">
+          <Skeleton className="h-10 w-[50%]" />
+          <Skeleton className="h-10 w-10" />
+        </div>
+        <div className="space-y-2">
+          <NavItem.Skeleton />
+          <NavItem.Skeleton />
+          <NavItem.Skeleton />
+        </div>
+      </>
+    );
 
   return (
     <>
