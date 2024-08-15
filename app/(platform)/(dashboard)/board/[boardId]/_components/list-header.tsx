@@ -8,10 +8,11 @@ import { useEventListener } from "usehooks-ts";
 import { ListOptions } from "./list-options";
 
 interface ListHeaderProps {
+  onAddCard: () => void;
   data: List;
 }
 
-export const ListHeader = ({ data }: ListHeaderProps) => {
+export const ListHeader = ({ data, onAddCard }: ListHeaderProps) => {
   const { execute } = useAction(updateList, {
     onSuccess: (data) => {
       toast.success(`Renamed list to ${data.title}`);
@@ -87,7 +88,7 @@ export const ListHeader = ({ data }: ListHeaderProps) => {
           {title}
         </div>
       )}
-      <ListOptions data={data} onAddCard={() => {}} />
+      <ListOptions data={data} onAddCard={onAddCard} />
     </div>
   );
 };
