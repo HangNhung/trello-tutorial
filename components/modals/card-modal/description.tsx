@@ -10,7 +10,7 @@ import { CardWithList } from "@/types";
 import { useQueryClient } from "@tanstack/react-query";
 import { AlignLeft, X } from "lucide-react";
 import { useParams } from "next/navigation";
-import { Key, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
@@ -46,6 +46,11 @@ export const Description = ({ data }: DescriptionProps) => {
       queryClient.invalidateQueries({
         queryKey: ["card", data.id],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ["card-logs", data.id],
+      });
+
       toast.success(`Updated card description`);
       disableEditing();
     },
