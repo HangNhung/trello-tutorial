@@ -40,8 +40,7 @@ export const FormPopover = ({
       router.push(`/board/${data.id}`);
     },
     onError: (error) => {
-      console.log("error", error);
-      toast.error("Something went wrong");
+      toast.error(error);
     },
   });
 
